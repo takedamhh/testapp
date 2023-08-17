@@ -45,24 +45,24 @@ jobs:
           -t $CONTAINER_IMAGE \
           -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE .
  
-    # # Set image tag in kustomization
+    # Set image tag in kustomization
 
-    # - name: Set image tag
-    #   run: |
-    #       cd deploy
-    #       kustomize edit set image $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
-    #       cat kustomization.yaml
-    # - name: Commit kustomization
-    #   run: |
-    #       git config --local user.email "action@github.com"
-    #       git config --local user.name "GitHub Action"
-    #       git commit -a -m "$CONTAINER_IMAGE"
-    # - name: Push changes to main
-    #   uses: ad-m/github-push-action@main
-    #   with:
-    #       github_token: ${{ secrets.GITHUB_TOKEN }}
-    #       branch: main
-    #       force: true       
+    - name: Set image tag
+      run: |
+          cd k8s
+          kustomize edit set image $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$CONTAINER_IMAGE
+          cat kustomization.yaml
+    - name: Commit kustomization
+      run: |
+          git config --local user.email "takedam.hogehoge@gmail.com"
+          git config --local user.name "takedamhh"
+          git commit -a -m "$CONTAINER_IMAGE"
+    - name: Push changes to main
+      uses: ad-m/github-push-action@main
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true       
     
     # Add additional steps here like scanning of image
 
