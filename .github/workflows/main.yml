@@ -58,7 +58,7 @@ jobs:
           git config --local user.name "takedamhh"
           git commit -a -m "$CONTAINER_IMAGE"
     - name: Push changes to main
-      uses: ad-m/github-push-action@main
+      uses: ad-m/github-push-action@master
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
