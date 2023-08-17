@@ -5,4 +5,4 @@ resources:
 
 images:
 - name: 926671442187.dkr.ecr.ap-southeast-1.amazonaws.com/testapp
-  newTag: eec093cad4335d10549f40fd969a0a4d9567f98e
+  newTag: 2e23ca1c6c8a5eadda5e19db81c7af25d479dd00
