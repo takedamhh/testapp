@@ -1,0 +1,48 @@
+参考サイト）
+https://aws.amazon.com/jp/blogs/news/building-a-gitops-pipeline-with-amazon-eks/
+
+（０）前提
+https://github.com/takedamhh/testapp にある Flaskアプリを対象とする。
+
+（１）bootstrap
+# これをやると、eksにfluxが導入される。
+# また、ownerに示したgithubに、repositoryの名称でリポジトリが作成される。
+# このリポジトリにはflux関連の設定が格納される。
+
+export GITHUB_TOKEN=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
+
+flux bootstrap github \
+--owner=takedamhh \
+--repository=testflux \
+--branch=main \
+--private=false \
+--personal=true \
+--token-auth \
+--path=clusters/takeda-m-eks-test
+
+（２）ecrを作成
+926671442187.dkr.ecr.ap-southeast-1.amazonaws.com/testapp
+
+（３）flux に testapp リポジトリの k8s 配下にあるマニュフェストを監視する設定を入れ込む。
+git clone https://github.com/takedamhh/testflux
+cd testflux
+
+flux create source git testapp \
+--url=https://github.com/takedamhh/testapp \
+--branch=main \
+--interval=30s \
+--export > ./clusters/takeda-m-eks-test/testapp-source.yaml
+
+flux create kustomization testapp \
+  --target-namespace=default \
+  --source=testapp \
+  --path="./k8s" \
+  --prune=true \
+  --interval=1h \
+  --export > ./clusters/takeda-m-eks-test/testapp-sync.yaml
+
+
+
+
+
+
