@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- deployment.yaml
+
+images:
+- name: 926671442187.dkr.ecr.ap-southeast-1.amazonaws.com/testapp
+  newTag: d0730f578ae27e8915b03c0172f1c31decdffa03

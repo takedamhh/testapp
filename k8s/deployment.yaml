@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: testapp
-          image: 926671442187.dkr.ecr.ap-southeast-1.amazonaws.com/testapp:30977910d7886fe7f58b7a170c971eea5f12b181
+          image: 926671442187.dkr.ecr.ap-southeast-1.amazonaws.com/testapp:670aa11f4ca789484d3da084424071371e39aab7
           imagePullPolicy: Always
           ports:
           - containerPort: 80
