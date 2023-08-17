@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testapp
+  labels:
+    app: testapp
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: testapp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: testapp
+    spec:
+      containers:
+        - name: testapp
+          image: 926671442187.dkr.ecr.ap-southeast-1.amazonaws.com/testapp:30977910d7886fe7f58b7a170c971eea5f12b181
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
