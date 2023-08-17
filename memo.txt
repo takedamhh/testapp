@@ -3,6 +3,10 @@ https://aws.amazon.com/jp/blogs/news/building-a-gitops-pipeline-with-amazon-eks/
 
 （０）前提
 https://github.com/takedamhh/testapp にある Flaskアプリを対象とする。
+testapp リポジトリのプライベートシークレットに、以下が設定されていること。（GitHub Actionsで使用している。）
+AWS_ACCOUNT_ID
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
 
 （１）bootstrap
 # これをやると、eksにfluxが導入される。
