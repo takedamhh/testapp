@@ -13,7 +13,7 @@ AWS_SECRET_ACCESS_KEY
 # また、ownerに示したgithubに、repositoryの名称でリポジトリが作成される。
 # このリポジトリにはflux関連の設定が格納される。
 
-export GITHUB_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+export GITHUB_TOKEN=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 flux bootstrap github \
 --owner=takedamhh \
