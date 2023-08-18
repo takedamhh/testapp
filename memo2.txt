@@ -1,6 +1,5 @@
 参考サイト）
-https://aws.amazon.com/jp/blogs/news/building-a-gitops-pipeline-with-amazon-eks/
-https://community.aws/tutorials/using-flux-to-implement-gitops-on-aws#4imagebased-automated-deployment-with-gitops-workflow
+https://kakakakakku.hatenablog.com/entry/2022/04/25/085327
 
 （０）前提
 https://github.com/takedamhh/testapp にある Flaskアプリを対象とする。
@@ -23,7 +22,8 @@ flux bootstrap github \
 --private=false \
 --personal=true \
 --token-auth \
---path=clusters/takeda-m-eks-test 
+--path=clusters/takeda-m-eks-test \
+--components-extra=image-reflector-controller,image-automation-controller
 
 （２）ecrを作成
 926671442187.dkr.ecr.ap-southeast-1.amazonaws.com/testapp
