@@ -1,3 +1,5 @@
+
+■Flux
 参考サイト）
 https://aws.amazon.com/jp/blogs/news/building-a-gitops-pipeline-with-amazon-eks/
 https://community.aws/tutorials/using-flux-to-implement-gitops-on-aws#4imagebased-automated-deployment-with-gitops-workflow
@@ -47,6 +49,39 @@ flux create kustomization testapp \
   --export > ./clusters/takeda-m-eks-test/testapp-sync.yaml
 
 
+■ArgoCD
+（１）EKSにArgoCDを入れる
+この↓を参考にArgoCDをEKSに入れて、管理画面にログインできるとこまでやる
+https://qiita.com/miyabiz/items/4022b0aba372a8f2c292
+
+（２）ArgoCDにApplicationを登録
+以下のURLを参考にApplicationとして登録するGitHubリポジトリを登録する。
+https://aws.amazon.com/jp/blogs/news/multi-cluster-management-for-kubernetes-with-cluster-api-and-argo-cd/
+　→ Amazon EC2 上で動作する k8s クラスターと Amazon EKS クラスターをデプロイするために、Argo CD で Application を 作成する
+※注）projectの値は、Application登録時のprojectと同一にすること。
+
+その後、GUIでApplicationを登録する。
+なお、上手く行ったサンプルのYAMLは以下。（GUIでYamlに切り替えて、以下を貼り付けできる。）
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: testapp
+spec:
+  destination:
+    name: ''
+    namespace: default
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: k8s
+    repoURL: 'https://github.com/takedamhh/testapp'
+    targetRevision: main
+  sources: []
+  project: default
+
+（３）Application登録されたら、Syncするとpodが登録される。
+SyncをManualにしているので、Application登録後にGUIからSyncすると
+gitリポジトリのk8s配下にあるマニュフェストとkustomizeの設定を読み込んで
+自動的にEKSへ反映させてくれる。
 
 
 
